@@ -10,10 +10,7 @@
 <p align="center">
 <a href="https://discord.gg/TSXuzEryAW"><img src="https://img.shields.io/badge/Ciyu-discord-%235562f6"></a>
 <a href="https://opensource.org/licenses/AGPL-3.0"><img src="https://img.shields.io/badge/license-AGPL-brightgreen.svg" alt="License: AGPL"></a>
-<p align="center"><img src="" alt="Ciyu" width="1000px" /></p>
-
-
-![image-20221118082846008](C:\Users\11933\AppData\Roaming\Typora\typora-user-images\image-20221118082846008.png)
+<p align="center"><img src="https://user-images.githubusercontent.com/65275566/202617413-6c849705-6477-4571-ac18-27eb7f30370b.png" alt="Ciyu" width="1000px" /></p>
 
 ## 安装词遇
 
