@@ -1,0 +1,574 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+  - url: http://localhost:44333
+    description: Generated server url
+paths:
+  /api/v1/users:
+    post:
+      tags:
+        - user-controller
+      operationId: register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterDto'
+        required: true
+      responses:
+        "200":
+          description: OK
+  /api/v1/tokens/refresh:
+    post:
+      tags:
+        - token-controller
+      operationId: refreshToken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshTokenData'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TokenDto'
+  /api/v1/meets:
+    post:
+      tags:
+        - meet-controller
+      operationId: createMeet
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMeetDto'
+        required: true
+      responses:
+        "200":
+          description: OK
+  /api/v1/meets/batch:
+    post:
+      tags:
+        - meet-controller
+      operationId: createMeets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMeetsDto'
+        required: true
+      responses:
+        "200":
+          description: OK
+  /api/v1/bonds:
+    get:
+      tags:
+        - bond-controller
+      operationId: getBonds
+      parameters:
+        - name: page
+          in: query
+          description: Zero-based page index (0..N)
+          schema:
+            type: integer
+            default: 0
+        - name: size
+          in: query
+          description: The size of the page to be returned
+          schema:
+            type: integer
+            default: 20
+        - name: sort
+          in: query
+          description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetBondsDto'
+    post:
+      tags:
+        - bond-controller
+      operationId: createBond
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBondDto'
+        required: true
+      responses:
+        "200":
+          description: OK
+    delete:
+      tags:
+        - bond-controller
+      operationId: removeBond
+      parameters:
+        - name: wordId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+  /api/v1/words/{id}:
+    get:
+      tags:
+        - word-controller
+      operationId: getWordById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WordDto'
+  /api/v1/tokens/login:
+    get:
+      tags:
+        - token-controller
+      operationId: login
+      parameters:
+        - name: phone
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TokenDto'
+  /api/v1/tokens/exchange:
+    get:
+      tags:
+        - token-controller
+      operationId: exchangeToken
+      parameters:
+        - name: loginToken
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TokenDto'
+  /api/v1/articles:
+    get:
+      tags:
+        - article-controller
+      operationId: getBestArticles
+      parameters:
+        - name: excludedArticleIds
+          in: query
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: page
+          in: query
+          description: Zero-based page index (0..N)
+          schema:
+            type: integer
+            default: 0
+        - name: size
+          in: query
+          description: The size of the page to be returned
+          schema:
+            type: integer
+            default: 20
+        - name: sort
+          in: query
+          description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SearchHitsArticle'
+  /api/v1/articles/word:
+    get:
+      tags:
+        - article-controller
+      operationId: searchByWordId
+      parameters:
+        - name: wordId
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Zero-based page index (0..N)
+          schema:
+            type: integer
+            default: 0
+        - name: size
+          in: query
+          description: The size of the page to be returned
+          schema:
+            type: integer
+            default: 20
+        - name: sort
+          in: query
+          description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SearchHitsArticle'
+components:
+  schemas:
+    RegisterDto:
+      type: object
+      properties:
+        phone:
+          pattern: "^[1]\\d{10}$"
+          type: string
+        password:
+          type: string
+    RefreshTokenData:
+      type: object
+      properties:
+        refreshToken:
+          type: string
+    TokenDto:
+      type: object
+      properties:
+        accessToken:
+          type: string
+        refreshToken:
+          type: string
+    CreateMeetDto:
+      type: object
+      properties:
+        meaningId:
+          type: string
+        articleId:
+          type: string
+        quality:
+          type: number
+          format: double
+    CreateMeetsDto:
+      type: object
+      properties:
+        articleId:
+          type: string
+        meaningIds:
+          type: array
+          items:
+            type: string
+    CreateBondDto:
+      type: object
+      properties:
+        meaningId:
+          type: string
+        articleId:
+          type: string
+        quality:
+          type: number
+          format: double
+    Meaning:
+      type: object
+      properties:
+        id:
+          type: string
+        definition:
+          type: string
+        word:
+          $ref: '#/components/schemas/Word'
+    Phonetic:
+      type: object
+      properties:
+        id:
+          type: string
+        locale:
+          type: string
+        symbol:
+          type: string
+        audio:
+          type: string
+        word:
+          $ref: '#/components/schemas/Word'
+    Word:
+      type: object
+      properties:
+        id:
+          type: string
+        phonetics:
+          type: array
+          items:
+            $ref: '#/components/schemas/Phonetic'
+    WordDto:
+      type: object
+      properties:
+        id:
+          type: string
+        meanings:
+          type: array
+          items:
+            $ref: '#/components/schemas/Meaning'
+        phonetics:
+          type: array
+          items:
+            $ref: '#/components/schemas/Phonetic'
+        hasBond:
+          type: boolean
+    GetBondsDto:
+      type: object
+      properties:
+        id:
+          type: string
+        word:
+          $ref: '#/components/schemas/Word'
+        strength:
+          type: number
+          format: double
+    AggregationsContainerObject:
+      type: object
+    Article:
+      type: object
+      properties:
+        id:
+          type: string
+        content:
+          type: string
+        title:
+          type: string
+        thumbnail:
+          type: string
+    EntryOption:
+      type: object
+      properties:
+        text:
+          type: string
+        offset:
+          type: integer
+          format: int32
+        length:
+          type: integer
+          format: int32
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/Option'
+    Explanation:
+      type: object
+      properties:
+        match:
+          type: boolean
+        value:
+          type: number
+          format: double
+        description:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/Explanation'
+    NestedMetaData:
+      type: object
+      properties:
+        field:
+          type: string
+        offset:
+          type: integer
+          format: int32
+        child:
+          $ref: '#/components/schemas/NestedMetaData'
+    Option:
+      type: object
+      properties:
+        text:
+          type: string
+        highlighted:
+          type: string
+        score:
+          type: number
+          format: float
+        collateMatch:
+          type: boolean
+    SearchHitArticle:
+      type: object
+      properties:
+        index:
+          type: string
+        id:
+          type: string
+        score:
+          type: number
+          format: float
+        sortValues:
+          type: array
+          items:
+            type: object
+        content:
+          $ref: '#/components/schemas/Article'
+        highlightFields:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        innerHits:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/SearchHitsObject'
+        nestedMetaData:
+          $ref: '#/components/schemas/NestedMetaData'
+        routing:
+          type: string
+        explanation:
+          $ref: '#/components/schemas/Explanation'
+        matchedQueries:
+          type: array
+          items:
+            type: string
+    SearchHitObject:
+      type: object
+      properties:
+        index:
+          type: string
+        id:
+          type: string
+        score:
+          type: number
+          format: float
+        sortValues:
+          type: array
+          items:
+            type: object
+        content:
+          type: object
+        highlightFields:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        nestedMetaData:
+          $ref: '#/components/schemas/NestedMetaData'
+        routing:
+          type: string
+        explanation:
+          $ref: '#/components/schemas/Explanation'
+        matchedQueries:
+          type: array
+          items:
+            type: string
+    SearchHitsArticle:
+      type: object
+      properties:
+        searchHits:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchHitArticle'
+        totalHitsRelation:
+          type: string
+          enum:
+            - EQUAL_TO
+            - GREATER_THAN_OR_EQUAL_TO
+            - "OFF"
+        suggest:
+          $ref: '#/components/schemas/Suggest'
+        totalHits:
+          type: integer
+          format: int64
+        maxScore:
+          type: number
+          format: float
+        aggregations:
+          $ref: '#/components/schemas/AggregationsContainerObject'
+        empty:
+          type: boolean
+    SearchHitsObject:
+      type: object
+      properties:
+        searchHits:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchHitObject'
+        totalHitsRelation:
+          type: string
+          enum:
+            - EQUAL_TO
+            - GREATER_THAN_OR_EQUAL_TO
+            - "OFF"
+        suggest:
+          $ref: '#/components/schemas/Suggest'
+        totalHits:
+          type: integer
+          format: int64
+        maxScore:
+          type: number
+          format: float
+        aggregations:
+          $ref: '#/components/schemas/AggregationsContainerObject'
+        empty:
+          type: boolean
+    Suggest:
+      type: object
+      properties:
+        suggestions:
+          type: array
+          items:
+            $ref: '#/components/schemas/SuggestionEntryOption'
+    SuggestionEntryOption:
+      type: object
+      properties:
+        name:
+          type: string
+        size:
+          type: integer
+          format: int32
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/EntryOption'
