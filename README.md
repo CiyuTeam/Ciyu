@@ -14,6 +14,17 @@
 
 ## 安装词遇
 
+1. 搭建Flutter开发环境
+2. 运行以下命令
+    * 打包到Android
+    '''bash
+    flutter build apk 
+    '''
+    * 打包到iOS
+    '''bash
+    flutter build ipa 
+    '''
+3. 等待打包完成，执行安装操作
 
 
 ## 技术栈
