@@ -1,5 +1,6 @@
 ---
 name: Sample form
+about: xxx
 description: Create an issue. 
 title: "[Bug]: "
 labels: [bug]
