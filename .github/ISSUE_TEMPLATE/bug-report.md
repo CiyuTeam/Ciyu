@@ -1,9 +1,15 @@
-name: Bug report
-about: Create a report to help us improve
-title: "[Bug] "
-labels: bug
+name: Sample form
+description: Create an issue. 
+title: "[Bug]: "
+labels: [bug]
+assignees:
+  - octocat
 body:
-  - type: markdown
+  - type: input
+    id: sample-input
     attributes:
-      value: |
-        Thanks for taking the time to fill out this bug report!
+      label: Sample Input
+      description: Write text here.
+      placeholder: Here will be text
+    validations:
+      required: true
