@@ -44,6 +44,13 @@ body:
       label: Ciyu Version(s)
       description: What version(s) of AppFlowy do you see this bug on?
       placeholder: e.g. v0.0.1, v0.0.2, ...
+      
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: If applicable, add screenshots to help explain your problem.
+      placeholder: Upload screenshots here...
 
   - type: textarea
     id: additional-context
