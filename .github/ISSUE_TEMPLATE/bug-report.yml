@@ -32,67 +32,18 @@ body:
       required: true
 
   - type: input
-    id: screenshots
+    id: operating-system
     attributes:
-      label: Screenshots
-      description: If applicable, add screenshots to help explain your problem.
-      placeholder: Upload screenshots here...
-
-  - type: input
-    id: desktop-os
-    attributes:
-      label: Desktop OS
-      placeholder: e.g. iOS
-    validations:
-      required: true
-
-  - type: input
-    id: desktop-browser
-    attributes:
-      label: Browser
-      placeholder: e.g. chrome, safari
-    validations:
-      required: true
-
-  - type: input
-    id: desktop-version
-    attributes:
-      label: Version
-      placeholder: e.g. 22
-    validations:
-      required: true
-
-  - type: input
-    id: smartphone-device
-    attributes:
-      label: Device
-      placeholder: e.g. iPhone6
-    validations:
-      required: true
-
-  - type: input
-    id: smartphone-os
-    attributes:
-      label: OS
+      label: Operating System
+      description: What OS are you seeing this bug on?
       placeholder: e.g. iOS8.1
-    validations:
-      required: true
 
   - type: input
-    id: smartphone-browser
+    id: ciyu-versions
     attributes:
-      label: Browser
-      placeholder: e.g. stock browser, safari
-    validations:
-      required: true
-
-  - type: input
-    id: smartphone-version
-    attributes:
-      label: Version
-      placeholder: e.g. 22
-    validations:
-      required: true
+      label: Ciyu Version(s)
+      description: What version(s) of AppFlowy do you see this bug on?
+      placeholder: e.g. v0.0.1, v0.0.2, ...
 
   - type: textarea
     id: additional-context
