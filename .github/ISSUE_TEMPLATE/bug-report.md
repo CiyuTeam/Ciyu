@@ -1,3 +1,4 @@
+---
 name: Sample form
 description: Create an issue. 
 title: "[Bug]: "
@@ -13,3 +14,4 @@ body:
       placeholder: Here will be text
     validations:
       required: true
+---
