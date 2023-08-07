@@ -1,18 +1,102 @@
----
-name: Sample form
-about: xxx
-description: Create an issue. 
-title: "[Bug]: "
-labels: [bug]
-assignees:
-  - octocat
+name: Bug report
+description: Create a report to help us improve
+title: "[Bug] "
+labels: bug
+
 body:
-  - type: input
-    id: sample-input
+  - type: textarea
+    id: bug-description
     attributes:
-      label: Sample Input
-      description: Write text here.
-      placeholder: Here will be text
+      label: Describe the bug
+      description: A clear and concise description of what the bug is.
+      placeholder: Describe the bug here...
     validations:
       required: true
----
+
+  - type: textarea
+    id: reproduce-steps
+    attributes:
+      label: To Reproduce
+      description: Steps to reproduce the behavior.
+      placeholder: "1. Go to '...'\n2. Click on '....'\n3. Scroll down to '....'\n4. See error"
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected behavior
+      description: A clear and concise description of what you expected to happen.
+      placeholder: Describe the expected behavior here...
+    validations:
+      required: true
+
+  - type: input
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: If applicable, add screenshots to help explain your problem.
+      placeholder: Upload screenshots here...
+
+  - type: input
+    id: desktop-os
+    attributes:
+      label: Desktop OS
+      placeholder: e.g. iOS
+    validations:
+      required: true
+
+  - type: input
+    id: desktop-browser
+    attributes:
+      label: Browser
+      placeholder: e.g. chrome, safari
+    validations:
+      required: true
+
+  - type: input
+    id: desktop-version
+    attributes:
+      label: Version
+      placeholder: e.g. 22
+    validations:
+      required: true
+
+  - type: input
+    id: smartphone-device
+    attributes:
+      label: Device
+      placeholder: e.g. iPhone6
+    validations:
+      required: true
+
+  - type: input
+    id: smartphone-os
+    attributes:
+      label: OS
+      placeholder: e.g. iOS8.1
+    validations:
+      required: true
+
+  - type: input
+    id: smartphone-browser
+    attributes:
+      label: Browser
+      placeholder: e.g. stock browser, safari
+    validations:
+      required: true
+
+  - type: input
+    id: smartphone-version
+    attributes:
+      label: Version
+      placeholder: e.g. 22
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: Add any other context about the problem here.
+      placeholder: Add context here...
