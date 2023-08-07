@@ -1,103 +1,62 @@
-name: Bug report
-about: Create a report to help us improve
-title: "[Bug] "
-labels: bug
-assignees: ''
-
+name: Bug Report
+description: File a bug report
+title: "[Bug]: "
+labels: ["bug", "triage"]
+assignees:
+  - octocat
 body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  - type: input
+    id: contact
+    attributes:
+      label: Contact Details
+      description: How can we get in touch with you if we need more info?
+      placeholder: ex. email@example.com
+    validations:
+      required: false
   - type: textarea
-    id: bug-description
+    id: what-happened
     attributes:
-      label: Describe the bug
-      description: A clear and concise description of what the bug is.
-      placeholder: Describe the bug here...
+      label: What happened?
+      description: Also tell us, what did you expect to happen?
+      placeholder: Tell us what you see!
+      value: "A bug happened!"
     validations:
       required: true
-
-  - type: textarea
-    id: reproduce-steps
-    attributes:
-      label: To Reproduce
-      description: Steps to reproduce the behavior.
-      placeholder: "1. Go to '...'\n2. Click on '....'\n3. Scroll down to '....'\n4. See error"
-    validations:
-      required: true
-
-  - type: textarea
-    id: expected-behavior
-    attributes:
-      label: Expected behavior
-      description: A clear and concise description of what you expected to happen.
-      placeholder: Describe the expected behavior here...
-    validations:
-      required: true
-
-  - type: input
-    id: screenshots
-    attributes:
-      label: Screenshots
-      description: If applicable, add screenshots to help explain your problem.
-      placeholder: Upload screenshots here...
-
-  - type: input
-    id: desktop-os
-    attributes:
-      label: Desktop OS
-      placeholder: e.g. iOS
-    validations:
-      required: true
-
-  - type: input
-    id: desktop-browser
-    attributes:
-      label: Browser
-      placeholder: e.g. chrome, safari
-    validations:
-      required: true
-
-  - type: input
-    id: desktop-version
+  - type: dropdown
+    id: version
     attributes:
       label: Version
-      placeholder: e.g. 22
+      description: What version of our software are you running?
+      options:
+        - 1.0.2 (Default)
+        - 1.0.3 (Edge)
     validations:
       required: true
-
-  - type: input
-    id: smartphone-device
+  - type: dropdown
+    id: browsers
     attributes:
-      label: Device
-      placeholder: e.g. iPhone6
-    validations:
-      required: true
-
-  - type: input
-    id: smartphone-os
-    attributes:
-      label: OS
-      placeholder: e.g. iOS8.1
-    validations:
-      required: true
-
-  - type: input
-    id: smartphone-browser
-    attributes:
-      label: Browser
-      placeholder: e.g. stock browser, safari
-    validations:
-      required: true
-
-  - type: input
-    id: smartphone-version
-    attributes:
-      label: Version
-      placeholder: e.g. 22
-    validations:
-      required: true
-
+      label: What browsers are you seeing the problem on?
+      multiple: true
+      options:
+        - Firefox
+        - Chrome
+        - Safari
+        - Microsoft Edge
   - type: textarea
-    id: additional-context
+    id: logs
     attributes:
-      label: Additional context
-      description: Add any other context about the problem here.
-      placeholder: Add context here...
+      label: Relevant log output
+      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
+      render: shell
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://example.com)
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true
